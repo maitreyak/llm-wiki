@@ -43,7 +43,7 @@ def main() -> None:
 
 @main.command()
 @click.argument("root", type=click.Path())
-@click.option("--provider", type=click.Choice(["anthropic", "ollama"]), default="anthropic",
+@click.option("--provider", type=click.Choice(["anthropic", "claude-cli", "ollama"]), default="anthropic",
               show_default=True, help="LLM backend.")
 @click.option("--model", default=None,
               help="Model for all roles (e.g. qwen2.5 for ollama). Default: claude-opus-5.")
@@ -197,7 +197,7 @@ def status(root: str) -> None:
               help="Questions whose contexts form the corpus (default: same as --n).")
 @click.option("--cache-dir", default=None, type=click.Path(), help="Wiki cache directory.")
 @click.option("--rebuild", is_flag=True, help="Force wiki rebuild even if cached.")
-@click.option("--provider", type=click.Choice(["anthropic", "ollama"]), default="anthropic",
+@click.option("--provider", type=click.Choice(["anthropic", "claude-cli", "ollama"]), default="anthropic",
               show_default=True, help="LLM backend.")
 @click.option("--model", default=None, help="Model for all roles (required for ollama).")
 def eval_cmd(dataset: str, n: int, corpus_questions: int | None, cache_dir: str | None,

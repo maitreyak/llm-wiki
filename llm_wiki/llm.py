@@ -142,6 +142,12 @@ def make_llm(config):
         from .ollama_llm import OllamaLLM
 
         return OllamaLLM(base_url=config.ollama_base_url, num_ctx=config.ollama_num_ctx)
+    if config.provider == "claude-cli":
+        from .claude_cli_llm import ClaudeCliLLM
+
+        return ClaudeCliLLM()
     if config.provider == "anthropic":
         return LLM()
-    raise ValueError(f"unknown provider {config.provider!r} (expected anthropic or ollama)")
+    raise ValueError(
+        f"unknown provider {config.provider!r} (expected anthropic, claude-cli, or ollama)"
+    )
