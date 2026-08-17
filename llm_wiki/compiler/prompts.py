@@ -47,7 +47,11 @@ Wiki fully captures the passage's factual content. Follow these rules:
 ENTITIES AND PAGES
 - Create one page per salient entity (person, organization, film/book/work,
   place, event, concept). Choose the page type from: {types} — use the most
-  specific fit; "topics" is the fallback.
+  specific fit; "topics" is the fallback. The title is just the entity's name
+  ("James Cameron", "Titanic") — never a path, never containing "/", never
+  repeating the type.
+- Set existing_name ONLY when the page you are updating is about the SAME
+  entity as your title; never point it at a different entity's page.
 - If a RELEVANT EXISTING PAGE covers an entity, UPDATE it (you are given its
   current content): keep all its existing facts, merge in the new ones, and
   return the complete merged page. Never drop existing facts or links.

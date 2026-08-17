@@ -67,12 +67,21 @@ def compile_passage(
     ops = []
     for op in result.get("pages", []):
         page_type = _clean_type(op.get("type", "topics"))
+        title = _clean_title(op.get("title", ""), op.get("type", ""), page_type)
+        op["title"] = title
         existing = op.get("existing_name")
+        name = None
         if existing and store.exists(normalize_name(existing)):
-            name = normalize_name(existing)
-        else:
-            resolved = store.resolve(op.get("title", ""))
-            name = resolved or f"{page_type}/{slugify(op.get('title', 'untitled'))}"
+            candidate = normalize_name(existing)
+            old = store.load(candidate)
+            # Guard against entity conflation: an "update" whose title shares no
+            # tokens with the target page is a misdirected create, not an update.
+            known = [old.title, *old.aliases, candidate.rsplit("/", 1)[-1].replace("-", " ")]
+            if _titles_overlap(title, known):
+                name = candidate
+        if name is None:
+            resolved = store.resolve(title)
+            name = resolved or f"{page_type}/{slugify(title or 'untitled')}"
         ops.append((name, page_type, op))
 
     written: list[str] = []
@@ -136,8 +145,39 @@ def _build_page(
 
 
 def _clean_type(raw: str) -> str:
+    """Clamp the model-provided type onto the canonical set (small models
+    emit things like 'media/film' or 'work')."""
     t = slugify(raw or "topics").lower()
-    return t if t else "topics"
+    for c in CANONICAL_TYPES:
+        if t == c or t.rstrip("s") == c.rstrip("s") or c in t.split("-"):
+            return c
+    return "topics"
+
+
+def _clean_title(raw: str, raw_type: str, page_type: str) -> str:
+    """Strip path-like noise from a model-provided title ('media/film Titanic'
+    -> 'Titanic'); titles must be entity names, never logical paths."""
+    title = (raw or "").strip()
+    if "/" in title:
+        title = title.split("/")[-1].strip()
+        if "-" in title and " " not in title and slugify(title) == title:
+            title = title.replace("-", " ")
+    type_tokens = set(slugify(raw_type).lower().split("-")) | {
+        page_type,
+        page_type.rstrip("s"),
+    }
+    words = title.split()
+    while len(words) > 1 and words[0].lower().strip("-") in type_tokens:
+        words = words[1:]
+    return " ".join(words).strip() or "Untitled"
+
+
+def _titles_overlap(title: str, known: list[str]) -> bool:
+    tokens = set(re.findall(r"[a-z0-9]+", title.lower()))
+    for candidate in known:
+        if tokens & set(re.findall(r"[a-z0-9]+", candidate.lower())):
+            return True
+    return False
 
 
 def _merge_lists(old: list[str], new: list[str]) -> list[str]:

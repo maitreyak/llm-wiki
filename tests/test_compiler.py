@@ -133,6 +133,51 @@ def test_compile_resolves_title_to_existing_page(store):
     assert len(store.load("people/Ada-Lovelace").key_facts) == 2
 
 
+def test_type_and_title_cleaning(store):
+    llm = FakeLLM(
+        [
+            {
+                "digest": "d",
+                "pages": [
+                    page_op("media/film Titanic 1997", "media/film", ["f. [src:a]"]),
+                    page_op("work/My-Life-as-a-Dog", "work", ["f. [src:a]"]),
+                ],
+            }
+        ]
+    )
+    result = compile_passage(llm, store.config, store, source_id="a", passage="p", selected=[], constraints=[])
+    assert "media/Titanic-1997" in result.written
+    assert "works/My-Life-as-a-Dog" in result.written
+    assert store.load("media/Titanic-1997").title == "Titanic 1997"
+    assert store.load("works/My-Life-as-a-Dog").title == "My Life as a Dog"
+
+
+def test_update_with_mismatched_existing_name_becomes_create(store):
+    llm1 = FakeLLM(
+        [{"digest": "d", "pages": [page_op("Lasse Hallstrom", "people", ["f1. [src:a]"])]}]
+    )
+    compile_passage(llm1, store.config, store, source_id="a", passage="p", selected=[], constraints=[])
+    # Model wrongly claims James Cameron is an update of Lasse's page.
+    llm2 = FakeLLM(
+        [
+            {
+                "digest": "d",
+                "pages": [
+                    page_op(
+                        "James Cameron",
+                        "people",
+                        ["Born 1954. [src:b]"],
+                        existing_name="people/Lasse-Hallstrom",
+                    )
+                ],
+            }
+        ]
+    )
+    compile_passage(llm2, store.config, store, source_id="b", passage="p", selected=["people/Lasse-Hallstrom"], constraints=[])
+    assert sorted(store.all_names()) == ["people/James-Cameron", "people/Lasse-Hallstrom"]
+    assert "Born 1954" not in " ".join(store.load("people/Lasse-Hallstrom").key_facts)
+
+
 def test_split_passages_packs_paragraphs():
     doc = Document(doc_id="d", text="a\n\nb\n\nc", title="T")
     parts = split_passages(doc, max_chars=1)
