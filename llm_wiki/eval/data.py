@@ -64,7 +64,9 @@ def _hf_load(env_key: str, default_path: str, config: str | None, split: str):
 
 
 def _load_hotpotqa(limit: int) -> EvalData:
-    rows = _hf_load("LLM_WIKI_HOTPOTQA_HF", "hotpot_qa", "distractor", f"validation[:{limit}]")
+    rows = _hf_load(
+        "LLM_WIKI_HOTPOTQA_HF", "hotpotqa/hotpot_qa", "distractor", f"validation[:{limit}]"
+    )
     items = []
     for row in rows:
         paragraphs = [
