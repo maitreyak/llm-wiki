@@ -17,6 +17,16 @@ uv sync --extra eval   # + benchmark eval harness (HuggingFace datasets)
 
 Authentication uses the standard Anthropic SDK resolution (`ANTHROPIC_API_KEY` or `ant auth login`).
 
+### Local models via Ollama
+
+No API key? Any tools-capable local model works through [Ollama](https://ollama.com) (quality is well below Claude — fine for development, not for benchmarks):
+
+```sh
+llm-wiki init ./mywiki --provider ollama --model qwen2.5
+```
+
+Everything else (`ingest`, `ask`, `fix`, `eval --provider ollama --model qwen2.5`) picks the backend up from the wiki's config.
+
 ## Usage
 
 ```sh

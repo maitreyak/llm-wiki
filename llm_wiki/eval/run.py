@@ -18,7 +18,7 @@ from ..agent.loop import ask
 from ..compiler.pipeline import Document, ingest
 from ..config import WikiConfig
 from ..errorbook.manager import ErrorBookManager
-from ..llm import LLM
+from ..llm import make_llm
 from ..search.index import WikiSearchIndex
 from ..wiki.page import slugify
 from ..wiki.store import WikiStore
@@ -54,7 +54,7 @@ def corpus_hash(paragraphs: list[tuple[str, str]]) -> str:
 
 
 def build_or_load_wiki(
-    llm: LLM,
+    llm,
     dataset: str,
     paragraphs: list[tuple[str, str]],
     cache_dir: Path,
@@ -102,14 +102,28 @@ def run_eval(
     cache_dir: Path | None,
     rebuild: bool,
     echo: Callable[[str], None],
+    provider: str = "anthropic",
+    model: str | None = None,
 ) -> dict:
     cache_dir = cache_dir or DEFAULT_CACHE
     cache_dir.mkdir(parents=True, exist_ok=True)
     data = load_eval_data(dataset, limit=max(n, corpus_questions))
     paragraphs = data.corpus(corpus_questions)
 
-    llm = LLM()
+    # The wiki root depends only on corpus content; provider/model settings are
+    # applied to its config so cached wikis remember what built them.
+    root = cache_dir / f"{dataset}-{corpus_hash(paragraphs)}"
+    probe = WikiConfig.load(root)
+    probe.provider = provider
+    if model:
+        probe.compiler_model = probe.agent_model = probe.judge_model = model
+    llm = make_llm(probe)
     config, store = build_or_load_wiki(llm, dataset, paragraphs, cache_dir, rebuild, echo)
+    config.provider = probe.provider
+    config.compiler_model = probe.compiler_model
+    config.agent_model = probe.agent_model
+    config.judge_model = probe.judge_model
+    config.save()
 
     index = WikiSearchIndex(store)
     results: list[QuestionResult] = []

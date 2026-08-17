@@ -20,9 +20,12 @@ CONFIG_FILENAME = "wiki.json"
 class WikiConfig:
     root: Path
 
+    provider: str = "anthropic"  # "anthropic" | "ollama"
     compiler_model: str = DEFAULT_MODEL
     agent_model: str = DEFAULT_MODEL
     judge_model: str = DEFAULT_MODEL
+    ollama_base_url: str = "http://localhost:11434"
+    ollama_num_ctx: int = 16384
 
     select_pages_k: int = 5
     agent_max_tool_calls: int = 15

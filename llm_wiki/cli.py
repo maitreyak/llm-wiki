@@ -28,11 +28,20 @@ def main() -> None:
 
 @main.command()
 @click.argument("root", type=click.Path())
-def init(root: str) -> None:
+@click.option("--provider", type=click.Choice(["anthropic", "ollama"]), default="anthropic",
+              show_default=True, help="LLM backend.")
+@click.option("--model", default=None,
+              help="Model for all roles (e.g. qwen2.5 for ollama). Default: claude-opus-5.")
+def init(root: str, provider: str, model: str | None) -> None:
     """Create an empty wiki at ROOT."""
     config = WikiConfig.load(Path(root))
+    config.provider = provider
+    if model:
+        config.compiler_model = config.agent_model = config.judge_model = model
+    elif provider == "ollama":
+        raise click.ClickException("--model is required with --provider ollama (e.g. --model qwen2.5)")
     WikiStore(config).init()
-    click.echo(f"Initialized empty wiki at {root}")
+    click.echo(f"Initialized empty wiki at {root} (provider={provider})")
 
 
 @main.command()
@@ -43,10 +52,10 @@ def ingest(root: str, files: tuple[Path, ...], no_repair: bool) -> None:
     """Compile documents into the wiki."""
     from .compiler.pipeline import ingest as run_ingest, load_documents
     from .errorbook.manager import ErrorBookManager
-    from .llm import LLM
+    from .llm import make_llm
 
     config, store = _open(root)
-    llm = LLM()
+    llm = make_llm(config)
     hooks = None if no_repair else ErrorBookManager(llm, config, store)
     docs = load_documents(list(files))
     report = run_ingest(
@@ -71,10 +80,10 @@ def ingest(root: str, files: tuple[Path, ...], no_repair: bool) -> None:
 def ask(root: str, question: str, trace: bool) -> None:
     """Answer a question using the wiki."""
     from .agent.loop import ask as run_ask
-    from .llm import LLM
+    from .llm import make_llm
 
     config, store = _open(root)
-    llm = LLM()
+    llm = make_llm(config)
     result = run_ask(llm, config, store, question)
     click.echo(result.full_text)
     if trace:
@@ -123,9 +132,9 @@ def fix(root: str, llm_checks: bool) -> None:
             check_unsupported_facts,
             remove_unsupported_facts,
         )
-        from .llm import LLM
+        from .llm import make_llm
 
-        llm = LLM()
+        llm = make_llm(config)
         fact_findings, to_remove = check_unsupported_facts(
             llm, config, store, store.all_names()
         )
@@ -170,7 +179,11 @@ def status(root: str) -> None:
               help="Questions whose contexts form the corpus (default: same as --n).")
 @click.option("--cache-dir", default=None, type=click.Path(), help="Wiki cache directory.")
 @click.option("--rebuild", is_flag=True, help="Force wiki rebuild even if cached.")
-def eval_cmd(dataset: str, n: int, corpus_questions: int | None, cache_dir: str | None, rebuild: bool) -> None:
+@click.option("--provider", type=click.Choice(["anthropic", "ollama"]), default="anthropic",
+              show_default=True, help="LLM backend.")
+@click.option("--model", default=None, help="Model for all roles (required for ollama).")
+def eval_cmd(dataset: str, n: int, corpus_questions: int | None, cache_dir: str | None,
+             rebuild: bool, provider: str, model: str | None) -> None:
     """Run a benchmark evaluation."""
     try:
         from .eval.run import run_eval
@@ -179,6 +192,8 @@ def eval_cmd(dataset: str, n: int, corpus_questions: int | None, cache_dir: str 
             f"eval extras not installed ({exc}); run: uv sync --extra eval"
         ) from exc
 
+    if provider == "ollama" and not model:
+        raise click.ClickException("--model is required with --provider ollama")
     run_eval(
         dataset,
         n=n,
@@ -186,6 +201,8 @@ def eval_cmd(dataset: str, n: int, corpus_questions: int | None, cache_dir: str 
         cache_dir=Path(cache_dir) if cache_dir else None,
         rebuild=rebuild,
         echo=click.echo,
+        provider=provider,
+        model=model,
     )
 
 

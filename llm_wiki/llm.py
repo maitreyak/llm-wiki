@@ -121,3 +121,14 @@ class LLM:
 def cached_system(text: str) -> list[dict]:
     """System prompt block with a cache breakpoint (stable across a batch)."""
     return [{"type": "text", "text": text, "cache_control": {"type": "ephemeral"}}]
+
+
+def make_llm(config):
+    """Build the LLM backend selected by config.provider."""
+    if config.provider == "ollama":
+        from .ollama_llm import OllamaLLM
+
+        return OllamaLLM(base_url=config.ollama_base_url, num_ctx=config.ollama_num_ctx)
+    if config.provider == "anthropic":
+        return LLM()
+    raise ValueError(f"unknown provider {config.provider!r} (expected anthropic or ollama)")
