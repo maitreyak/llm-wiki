@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Callable, Protocol
 
 from ..config import WikiConfig
+from ..errorbook.validators import PassageAudit
 from ..llm import LLM
 from ..search.index import WikiSearchIndex
 from ..wiki.store import WikiStore
@@ -26,7 +27,7 @@ from .select import select_pages
 
 
 class RepairHooks(Protocol):
-    def after_article(self, selections: dict[str, list[str]]) -> None:
+    def after_article(self, audits: list[PassageAudit]) -> None:
         """Run validators + code autofix after one article's passages."""
 
     def periodic_fix(self) -> None:
@@ -100,11 +101,12 @@ def ingest(
     say = progress or (lambda _msg: None)
 
     for doc_num, doc in enumerate(documents, start=1):
-        selections: dict[str, list[str]] = {}
+        audits: list[PassageAudit] = []
         for source_id, passage in split_passages(doc):
             say(f"[{doc_num}/{len(documents)}] compiling {source_id}")
             constraints = constraints_fn() if constraints_fn else []
             selected = select_pages(llm, config, store, index, passage)
+            existing_before = set(store.all_names())
             result = compile_passage(
                 llm,
                 config,
@@ -114,13 +116,20 @@ def ingest(
                 selected=selected,
                 constraints=constraints,
             )
-            selections[source_id] = result.selected
+            audits.append(
+                PassageAudit(
+                    source_id=source_id,
+                    selected=result.selected,
+                    written=result.written,
+                    preexisting=[w for w in result.written if w in existing_before],
+                )
+            )
             report.passages += 1
             report.pages_written.update(result.written)
             index.rebuild()
         report.articles += 1
         if hooks:
-            hooks.after_article(selections)
+            hooks.after_article(audits)
             if doc_num % config.repair_every_n_articles == 0:
                 say(f"periodic LLM repair after article {doc_num}")
                 hooks.periodic_fix()
