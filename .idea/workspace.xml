@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e489f41-d6a2-4253-9f4d-bead12c4a638" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/llm_wiki/agent/loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/llm_wiki/agent/loop.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_agent_loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_agent_loop.py" afterDir="false" />
-    </list>
+    <list default="true" id="0e489f41-d6a2-4253-9f4d-bead12c4a638" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,7 +52,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1786997845180</updated>
-      <workItem from="1786997846239" duration="1463000" />
+      <workItem from="1786997846239" duration="2073000" />
     </task>
     <servers />
   </component>

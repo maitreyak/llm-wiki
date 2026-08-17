@@ -73,7 +73,8 @@ class LLM:
             kwargs["output_config"] = {
                 "format": {"type": "json_schema", "schema": schema}
             }
-        if effort:
+        # Haiku-tier models reject the effort parameter (400).
+        if effort and not model.startswith("claude-haiku"):
             kwargs.setdefault("output_config", {})["effort"] = effort
 
         last_exc: Exception | None = None
