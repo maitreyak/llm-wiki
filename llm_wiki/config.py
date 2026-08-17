@@ -33,6 +33,10 @@ class WikiConfig:
     repair_every_n_articles: int = 10
     finalization_rounds: int = 3
     contradiction_sample_pairs: int = 20
+    # Delete facts the judge model deems unsupported. Keep off for weak local
+    # judges — a wrong judgment destroys good facts; findings are always
+    # recorded in the error book either way.
+    judge_autoremove: bool = True
 
     max_output_tokens: int = 8192
 

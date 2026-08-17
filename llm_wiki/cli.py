@@ -36,6 +36,8 @@ def init(root: str, provider: str, model: str | None) -> None:
     """Create an empty wiki at ROOT."""
     config = WikiConfig.load(Path(root))
     config.provider = provider
+    if provider == "ollama":
+        config.judge_autoremove = False  # weak local judges misjudge; record only
     if model:
         config.compiler_model = config.agent_model = config.judge_model = model
     elif provider == "ollama":
@@ -139,7 +141,8 @@ def fix(root: str, llm_checks: bool) -> None:
             llm, config, store, store.all_names()
         )
         book.record_findings(fact_findings)
-        log.extend(remove_unsupported_facts(store, to_remove))
+        if config.judge_autoremove:
+            log.extend(remove_unsupported_facts(store, to_remove))
         book.record_findings(check_contradictions(llm, config, store))
     book.save()
 

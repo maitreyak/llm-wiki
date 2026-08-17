@@ -53,7 +53,8 @@ class ErrorBookManager:
                 self.llm, self.config, self.store, pages
             )
             self.book.record_findings(findings)
-            self.fix_log.extend(remove_unsupported_facts(self.store, to_remove))
+            if self.config.judge_autoremove:
+                self.fix_log.extend(remove_unsupported_facts(self.store, to_remove))
         self._touched_since_llm_fix.clear()
         self.book.save()
 
