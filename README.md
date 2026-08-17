@@ -29,6 +29,20 @@ llm-wiki status ./mywiki                     # pages, links, open errors
 llm-wiki eval hotpotqa --n 50                # benchmark run (cached wiki builds)
 ```
 
+## Smoke test
+
+With credentials set, this exercises the full loop — compile a tiny corpus, then answer a multi-hop comparison question that requires traversing film → director → birth-date evidence across pages:
+
+```sh
+llm-wiki init /tmp/smokewiki
+llm-wiki ingest /tmp/smokewiki examples/smoke/*.md
+llm-wiki status /tmp/smokewiki
+llm-wiki ask /tmp/smokewiki --trace \
+  "Which film's director was born first: What's Eating Gilbert Grape or Titanic?"
+```
+
+Expected: the trace shows `wiki_search`/`wiki_read` calls walking the link structure, and the answer is *What's Eating Gilbert Grape* (Hallström, 1946, vs Cameron, 1954).
+
 ## Development
 
 ```sh
