@@ -37,6 +37,7 @@ Wikilinks use that logical name: ``[[people/Lasse-Hallstrom]]`` or
 from __future__ import annotations
 
 import re
+import unicodedata
 from dataclasses import dataclass, field
 from datetime import date
 
@@ -53,10 +54,14 @@ REQUIRED_SECTIONS = ("Key Facts", "Related Pages", "Related Sources")
 
 
 def slugify(name: str) -> str:
-    """Turn an entity name into a filesystem/wikilink-safe page basename."""
-    slug = name.strip()
+    """Turn an entity name into a filesystem/wikilink-safe ASCII basename.
+
+    Diacritics are folded (Hallström -> Hallstrom) so links written with or
+    without accents land on the same page."""
+    slug = unicodedata.normalize("NFKD", name.strip())
+    slug = "".join(c for c in slug if not unicodedata.combining(c))
     slug = re.sub(r"['’\"“”]", "", slug)
-    slug = re.sub(r"[^A-Za-z0-9À-ɏ]+", "-", slug)
+    slug = re.sub(r"[^A-Za-z0-9]+", "-", slug)
     slug = re.sub(r"-{2,}", "-", slug).strip("-")
     return slug or "untitled"
 
