@@ -43,6 +43,10 @@ class RefusalError(RuntimeError):
     pass
 
 
+class TruncatedOutputError(RuntimeError):
+    pass
+
+
 @dataclass
 class LLM:
     client: anthropic.Anthropic = field(default_factory=anthropic.Anthropic)
@@ -107,16 +111,24 @@ class LLM:
         max_tokens: int,
         effort: str | None = None,
     ) -> dict:
-        response = self.message(
-            model=model,
-            system=system,
-            messages=[{"role": "user", "content": user}],
-            max_tokens=max_tokens,
-            schema=schema,
-            effort=effort,
+        # A response that hits max_tokens is truncated mid-JSON; retry once
+        # with double the budget before giving up.
+        for attempt_tokens in (max_tokens, max_tokens * 2):
+            response = self.message(
+                model=model,
+                system=system,
+                messages=[{"role": "user", "content": user}],
+                max_tokens=attempt_tokens,
+                schema=schema,
+                effort=effort,
+            )
+            if response.stop_reason == "max_tokens":
+                continue
+            text = next(b.text for b in response.content if b.type == "text")
+            return json.loads(text)
+        raise TruncatedOutputError(
+            f"structured output still truncated at {max_tokens * 2} tokens"
         )
-        text = next(b.text for b in response.content if b.type == "text")
-        return json.loads(text)
 
 
 def cached_system(text: str) -> list[dict]:

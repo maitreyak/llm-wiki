@@ -49,11 +49,13 @@ class IngestReport:
     articles: int = 0
     passages: int = 0
     pages_written: set[str] = field(default_factory=set)
+    skipped: list[str] = field(default_factory=list)  # source_ids that failed
 
     def __str__(self) -> str:
+        skipped = f" ({len(self.skipped)} passages skipped)" if self.skipped else ""
         return (
             f"{self.articles} articles / {self.passages} passages -> "
-            f"{len(self.pages_written)} pages touched"
+            f"{len(self.pages_written)} pages touched{skipped}"
         )
 
 
@@ -105,17 +107,22 @@ def ingest(
         for source_id, passage in split_passages(doc):
             say(f"[{doc_num}/{len(documents)}] compiling {source_id}")
             constraints = constraints_fn() if constraints_fn else []
-            selected = select_pages(llm, config, store, index, passage)
-            existing_before = set(store.all_names())
-            result = compile_passage(
-                llm,
-                config,
-                store,
-                source_id=source_id,
-                passage=passage,
-                selected=selected,
-                constraints=constraints,
-            )
+            try:
+                selected = select_pages(llm, config, store, index, passage)
+                existing_before = set(store.all_names())
+                result = compile_passage(
+                    llm,
+                    config,
+                    store,
+                    source_id=source_id,
+                    passage=passage,
+                    selected=selected,
+                    constraints=constraints,
+                )
+            except Exception as exc:  # noqa: BLE001 — one passage must not kill a build
+                say(f"SKIPPED {source_id}: {type(exc).__name__}: {exc}")
+                report.skipped.append(source_id)
+                continue
             audits.append(
                 PassageAudit(
                     source_id=source_id,

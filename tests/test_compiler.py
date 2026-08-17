@@ -178,6 +178,58 @@ def test_update_with_mismatched_existing_name_becomes_create(store):
     assert "Born 1954" not in " ".join(store.load("people/Lasse-Hallstrom").key_facts)
 
 
+def test_structured_retries_on_truncation():
+    from types import SimpleNamespace
+
+    from llm_wiki.llm import LLM, TruncatedOutputError
+
+    calls = []
+
+    class FakeMessagesLLM(LLM):
+        def message(self, **kwargs):
+            calls.append(kwargs["max_tokens"])
+            if len(calls) == 1:
+                return SimpleNamespace(stop_reason="max_tokens", content=[])
+            return SimpleNamespace(
+                stop_reason="end_turn",
+                content=[SimpleNamespace(type="text", text='{"ok": true}')],
+            )
+
+    llm = FakeMessagesLLM()
+    out = llm.structured(model="m", system="s", user="u", schema={}, max_tokens=100)
+    assert out == {"ok": True}
+    assert calls == [100, 200]
+
+    calls.clear()
+
+    class AlwaysTruncated(LLM):
+        def message(self, **kwargs):
+            return SimpleNamespace(stop_reason="max_tokens", content=[])
+
+    try:
+        AlwaysTruncated().structured(model="m", system="s", user="u", schema={}, max_tokens=100)
+        assert False, "expected TruncatedOutputError"
+    except TruncatedOutputError:
+        pass
+
+
+def test_pipeline_skips_failing_passage(store):
+    from llm_wiki.compiler.pipeline import Document, ingest
+
+    class ExplodingLLM:
+        def structured(self, **kwargs):
+            raise RuntimeError("boom")
+
+    report = ingest(
+        ExplodingLLM(),
+        store.config,
+        store,
+        [Document(doc_id="d1", text="some text")],
+    )
+    assert report.skipped == ["d1"]
+    assert report.articles == 1
+
+
 def test_split_passages_packs_paragraphs():
     doc = Document(doc_id="d", text="a\n\nb\n\nc", title="T")
     parts = split_passages(doc, max_chars=1)
