@@ -112,7 +112,12 @@ class WikiStore:
         ref = normalize_name(ref)
         if self.exists(ref):
             return ref
-        return self.alias_map().get(ref.strip().lower())
+        aliases = self.alias_map()
+        for variant in (ref, ref.replace("_", " "), ref.replace("-", " ")):
+            hit = aliases.get(variant.strip().lower())
+            if hit:
+                return hit
+        return None
 
     # --- indexes -------------------------------------------------------------
 

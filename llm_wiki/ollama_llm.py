@@ -12,6 +12,7 @@ Claude backend — useful for local development and demos, not benchmarks.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from types import SimpleNamespace
 
@@ -93,13 +94,39 @@ def anthropic_messages_to_ollama(system: str, messages: list[dict]) -> list[dict
     return out
 
 
+TEXTUAL_TOOL_CALL_RE = re.compile(
+    r"\{[^{}]*\"name\"\s*:\s*\"(\w+)\"[^{}]*\"arguments\"\s*:\s*(\{[^{}]*\})[^{}]*\}"
+)
+
+
+def extract_textual_tool_calls(text: str) -> list[dict]:
+    """Small models often *write* a tool call into their text instead of
+    emitting one ('```{\"name\": \"wiki_read\", \"arguments\": {...}}```').
+    Parse those so they can be executed for real."""
+    calls = []
+    for m in TEXTUAL_TOOL_CALL_RE.finditer(text):
+        try:
+            args = json.loads(m.group(2))
+        except json.JSONDecodeError:
+            continue
+        calls.append({"function": {"name": m.group(1), "arguments": args}})
+    return calls
+
+
 def ollama_response_to_blocks(message: dict) -> tuple[list, str]:
     """Ollama response message -> (Anthropic-style blocks, stop_reason)."""
     blocks = []
     text = (message.get("content") or "").strip()
+    calls = message.get("tool_calls") or []
+    if text and not calls:
+        textual = extract_textual_tool_calls(text)
+        if textual:
+            # A narrated tool call beats trusting whatever "result" the model
+            # imagined afterward — execute it and drop the surrounding text.
+            calls = textual
+            text = ""
     if text:
         blocks.append(SimpleNamespace(type="text", text=text))
-    calls = message.get("tool_calls") or []
     for i, call in enumerate(calls):
         fn = call.get("function", {})
         args = fn.get("arguments") or {}

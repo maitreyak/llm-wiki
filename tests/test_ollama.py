@@ -72,6 +72,25 @@ def test_response_to_blocks_with_tool_calls():
     assert blocks[0].input == {"a": 1}
 
 
+def test_textual_tool_call_is_executed_not_trusted():
+    text = (
+        "Let me read the pages.\n```python\n"
+        '{"name": "wiki_read", "arguments": {"paths": ["Lasse_Hallstrom"]}}\n'
+        "```\nAfter reading: born 1952.\nANSWER: made up"
+    )
+    blocks, stop = ollama_response_to_blocks({"content": text})
+    assert stop == "tool_use"
+    assert [b.type for b in blocks] == ["tool_use"]
+    assert blocks[0].name == "wiki_read"
+    assert blocks[0].input == {"paths": ["Lasse_Hallstrom"]}
+
+
+def test_plain_text_with_braces_not_misparsed():
+    blocks, stop = ollama_response_to_blocks({"content": "ANSWER: {unknown}"})
+    assert stop == "end_turn"
+    assert blocks[0].text == "ANSWER: {unknown}"
+
+
 def test_swallowed_tool_call_retries_without_tools(monkeypatch):
     llm = OllamaLLM()
     payloads = []
