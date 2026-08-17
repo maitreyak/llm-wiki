@@ -224,10 +224,24 @@ def test_pipeline_skips_failing_passage(store):
         ExplodingLLM(),
         store.config,
         store,
-        [Document(doc_id="d1", text="some text")],
+        [Document(doc_id="d1", text="some text"), Document(doc_id="d2", text="more")],
     )
-    assert report.skipped == ["d1"]
-    assert report.articles == 1
+    assert report.skipped == ["d1", "d2"]
+    assert report.articles == 2
+
+
+def test_pipeline_aborts_on_consecutive_failures(store):
+    import pytest as _pytest
+
+    from llm_wiki.compiler.pipeline import Document, ingest
+
+    class ExplodingLLM:
+        def structured(self, **kwargs):
+            raise RuntimeError("credit balance too low")
+
+    docs = [Document(doc_id=f"d{i}", text="t") for i in range(5)]
+    with _pytest.raises(RuntimeError, match="consecutive passage failures"):
+        ingest(ExplodingLLM(), store.config, store, docs)
 
 
 def test_split_passages_packs_paragraphs():

@@ -101,6 +101,8 @@ def ingest(
     index = WikiSearchIndex(store)
     report = IngestReport()
     say = progress or (lambda _msg: None)
+    consecutive_failures = 0
+    max_consecutive_failures = 3
 
     for doc_num, doc in enumerate(documents, start=1):
         audits: list[PassageAudit] = []
@@ -122,7 +124,17 @@ def ingest(
             except Exception as exc:  # noqa: BLE001 — one passage must not kill a build
                 say(f"SKIPPED {source_id}: {type(exc).__name__}: {exc}")
                 report.skipped.append(source_id)
+                consecutive_failures += 1
+                if consecutive_failures >= max_consecutive_failures:
+                    # Isolated passages fail for passage-specific reasons;
+                    # a streak means something systemic (billing, auth,
+                    # network) — abort instead of failing through the corpus.
+                    raise RuntimeError(
+                        f"aborting ingest: {consecutive_failures} consecutive "
+                        f"passage failures — last: {exc}"
+                    ) from exc
                 continue
+            consecutive_failures = 0
             audits.append(
                 PassageAudit(
                     source_id=source_id,
