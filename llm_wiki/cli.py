@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 
@@ -9,6 +10,19 @@ import click
 
 from .config import WikiConfig
 from .wiki.store import WikiStore
+
+
+def _load_dotenv() -> None:
+    """Load KEY=value pairs from ./.env (real environment wins)."""
+    path = Path.cwd() / ".env"
+    if not path.exists():
+        return
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        os.environ.setdefault(key.strip(), value.strip().strip("'\""))
 
 
 def _open(root: str) -> tuple[WikiConfig, WikiStore]:
@@ -24,6 +38,7 @@ def _open(root: str) -> tuple[WikiConfig, WikiStore]:
 @click.group()
 def main() -> None:
     """LLM-Wiki: compile documents into a Wiki and answer questions over it."""
+    _load_dotenv()
 
 
 @main.command()
