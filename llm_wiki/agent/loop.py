@@ -41,6 +41,18 @@ Format the final answer as:
 ANSWER: <short answer — the entity, date, yes/no, etc.>
 EVIDENCE: <one or two sentences citing the pages used>"""
 
+# Small local models stall on the full prompt above (observed with qwen2.5:
+# after parallel tool calls it returns empty content). They get a compact one.
+COMPACT_AGENT_SYSTEM = """\
+Answer the question using the Wiki, via the wiki_search and wiki_read tools.
+Search to find pages, then ALWAYS read them with wiki_read before answering.
+For multi-hop questions, follow [[wikilinks]] on the pages you read. Base your
+answer only on pages you read; if the Wiki lacks the answer, say so.
+
+End with:
+ANSWER: <short answer>
+EVIDENCE: <pages used>"""
+
 
 @dataclass
 class AgentTrace:
@@ -78,12 +90,16 @@ def ask(
     trace = AgentTrace()
     messages: list[dict] = [{"role": "user", "content": question}]
     empty_streak = 0
-    nudged = False
+    nudges = 0
+    max_nudges = 2
+    system_prompt = (
+        COMPACT_AGENT_SYSTEM if getattr(config, "provider", "") == "ollama" else AGENT_SYSTEM
+    )
 
     while True:
         response = llm.message(
             model=config.agent_model,
-            system=cached_system(AGENT_SYSTEM),
+            system=cached_system(system_prompt),
             messages=messages,
             max_tokens=config.max_output_tokens,
             tools=[WIKI_SEARCH_TOOL, WIKI_READ_TOOL],
@@ -92,15 +108,22 @@ def ask(
 
         if response.stop_reason != "tool_use" or not tool_uses:
             text = "".join(b.text for b in response.content if b.type == "text")
-            if trace.reads == 0 and not nudged and store.all_names():
-                nudged = True
-                messages.append({"role": "assistant", "content": response.content})
+            stalled = not text.strip()
+            must_read = trace.reads == 0 and store.all_names()
+            if (stalled or must_read) and nudges < max_nudges:
+                nudges += 1
+                if response.content:
+                    messages.append({"role": "assistant", "content": response.content})
                 messages.append(
                     {
                         "role": "user",
                         "content": (
-                            "You must read at least one Wiki page with wiki_read "
-                            "before giving a final answer. Continue."
+                            "You have not answered yet. Use wiki_read to read the "
+                            "relevant pages found by your searches, then give your "
+                            "final answer in the required ANSWER:/EVIDENCE: format."
+                            if stalled
+                            else "You must read at least one Wiki page with "
+                            "wiki_read before giving a final answer. Continue."
                         ),
                     }
                 )
@@ -153,7 +176,7 @@ def ask(
             )
             final = llm.message(
                 model=config.agent_model,
-                system=cached_system(AGENT_SYSTEM),
+                system=cached_system(system_prompt),
                 messages=messages,
                 max_tokens=config.max_output_tokens,
             )

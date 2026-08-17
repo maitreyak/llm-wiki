@@ -72,6 +72,30 @@ def test_response_to_blocks_with_tool_calls():
     assert blocks[0].input == {"a": 1}
 
 
+def test_swallowed_tool_call_retries_without_tools(monkeypatch):
+    llm = OllamaLLM()
+    payloads = []
+
+    def fake_chat(payload):
+        payloads.append(payload)
+        if "tools" in payload:
+            return {"message": {"content": "", "tool_calls": []}}  # swallowed
+        return {"message": {"content": "ANSWER: x"}}
+
+    monkeypatch.setattr(llm, "_chat", fake_chat)
+    resp = llm.message(
+        model="m",
+        system="s",
+        messages=[{"role": "user", "content": "q"}],
+        max_tokens=100,
+        tools=[{"name": "t", "description": "", "input_schema": {"type": "object"}}],
+    )
+    assert len(payloads) == 2
+    assert "tools" not in payloads[1]
+    assert resp.stop_reason == "end_turn"
+    assert resp.content[0].text == "ANSWER: x"
+
+
 def test_make_llm_factory(tmp_path):
     config = WikiConfig(root=tmp_path, provider="ollama")
     llm = make_llm(config)

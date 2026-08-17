@@ -171,6 +171,15 @@ class OllamaLLM:
             payload["format"] = schema
         data = self._chat(payload)
         blocks, stop_reason = ollama_response_to_blocks(data.get("message", {}))
+        if tools and not blocks:
+            # Known Ollama failure mode: the model emits a malformed tool call
+            # and the parser swallows it — tokens were generated (eval_count>0)
+            # but the message has neither content nor tool_calls. Re-ask the
+            # same context without tools to force a plain-text response; the
+            # agent loop re-offers tools on the next turn.
+            retry = {k: v for k, v in payload.items() if k != "tools"}
+            data = self._chat(retry)
+            blocks, stop_reason = ollama_response_to_blocks(data.get("message", {}))
         return SimpleNamespace(content=blocks, stop_reason=stop_reason)
 
     def structured(

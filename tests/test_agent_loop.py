@@ -88,6 +88,35 @@ def test_nudge_when_answering_without_reading(store):
     )
 
 
+def test_empty_response_stall_is_retried(store):
+    llm = ScriptedLLM(
+        [
+            response([tool_block("t1", "wiki_search", {"query": "Ada"})], "tool_use"),
+            response([], "end_turn"),  # model stalls with empty content
+            response(
+                [tool_block("t2", "wiki_read", {"paths": ["people/Ada-Lovelace"]})], "tool_use"
+            ),
+            response([text_block("ANSWER: 1815")], "end_turn"),
+        ]
+    )
+    result = ask(llm, store.config, store, "q")
+    assert result.answer == "1815"
+    assert result.trace.reads == 1
+
+
+def test_stall_gives_up_after_max_nudges(store):
+    llm = ScriptedLLM(
+        [
+            response([], "end_turn"),
+            response([], "end_turn"),
+            response([], "end_turn"),
+        ]
+    )
+    result = ask(llm, store.config, store, "q")
+    assert result.answer == ""
+    assert len(llm.requests) == 3  # 1 initial + 2 nudges, then give up
+
+
 def test_budget_termination(store):
     config = store.config
     config.agent_max_tool_calls = 2
