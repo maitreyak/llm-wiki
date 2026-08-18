@@ -167,7 +167,9 @@ def ingest(
             report.pages_written.update(result.written)
             index.rebuild()
         report.articles += 1
-        if hooks:
+        # During resume fast-forward nothing was compiled: audits is empty and
+        # running validators/autofix per replayed article is pure overhead.
+        if hooks and audits:
             _run_hook(hooks.after_article, say, "after-article repair", audits)
             if doc_num % config.repair_every_n_articles == 0:
                 say(f"periodic LLM repair after article {doc_num}")
