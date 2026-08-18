@@ -93,7 +93,11 @@ class LLM:
                         f"(category: {getattr(response.stop_details, 'category', None)})"
                     )
                 return response
-            except (anthropic.RateLimitError, anthropic.InternalServerError) as exc:
+            except anthropic.APIStatusError as exc:
+                # Retry transient statuses: 429 rate limit, >=500 server
+                # errors, and 529 overloaded (raised as bare APIStatusError).
+                if exc.status_code != 429 and exc.status_code < 500:
+                    raise
                 last_exc = exc
                 time.sleep(min(2**attempt * 2.0, 30.0))
             except anthropic.APIConnectionError as exc:
