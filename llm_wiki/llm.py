@@ -51,7 +51,7 @@ class TruncatedOutputError(RuntimeError):
 class LLM:
     client: anthropic.Anthropic = field(default_factory=anthropic.Anthropic)
     usage: Usage = field(default_factory=Usage)
-    max_attempts: int = 6
+    max_attempts: int = 8
 
     def message(
         self,
@@ -99,7 +99,9 @@ class LLM:
                 if exc.status_code != 429 and exc.status_code < 500:
                     raise
                 last_exc = exc
-                time.sleep(min(2**attempt * 2.0, 30.0))
+                # Up to ~4.5 min of total patience — overload incidents flap
+                # for minutes at a time; skipping is costlier than waiting.
+                time.sleep(min(2**attempt * 2.0, 90.0))
             except anthropic.APIConnectionError as exc:
                 last_exc = exc
                 time.sleep(2.0)

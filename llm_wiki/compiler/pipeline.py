@@ -103,6 +103,7 @@ def ingest(
     say = progress or (lambda _msg: None)
     consecutive_failures = 0
     max_consecutive_failures = 3
+    retry_queue: list[tuple[str, str]] = []
 
     for doc_num, doc in enumerate(documents, start=1):
         audits: list[PassageAudit] = []
@@ -124,6 +125,7 @@ def ingest(
             except Exception as exc:  # noqa: BLE001 — one passage must not kill a build
                 say(f"SKIPPED {source_id}: {type(exc).__name__}: {exc}")
                 report.skipped.append(source_id)
+                retry_queue.append((source_id, passage))
                 consecutive_failures += 1
                 if consecutive_failures >= max_consecutive_failures:
                     # Isolated passages fail for passage-specific reasons;
@@ -153,6 +155,31 @@ def ingest(
                 say(f"periodic LLM repair after article {doc_num}")
                 _run_hook(hooks.periodic_fix, say, "periodic repair")
             index.rebuild()
+
+    # Second chance for passages skipped on transient failures (API flaps):
+    # one retry each, at the end, when the outage has likely passed.
+    if retry_queue:
+        say(f"retrying {len(retry_queue)} skipped passage(s)")
+        for source_id, passage in retry_queue:
+            try:
+                constraints = constraints_fn() if constraints_fn else []
+                selected = select_pages(llm, config, store, index, passage)
+                result = compile_passage(
+                    llm,
+                    config,
+                    store,
+                    source_id=source_id,
+                    passage=passage,
+                    selected=selected,
+                    constraints=constraints,
+                )
+                report.skipped.remove(source_id)
+                report.passages += 1
+                report.pages_written.update(result.written)
+                index.rebuild()
+                say(f"recovered {source_id}")
+            except Exception as exc:  # noqa: BLE001
+                say(f"still failing {source_id}: {type(exc).__name__}: {exc}")
 
     if hooks:
         say("finalization repair rounds")
