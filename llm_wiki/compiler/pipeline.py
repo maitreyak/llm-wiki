@@ -148,17 +148,27 @@ def ingest(
             index.rebuild()
         report.articles += 1
         if hooks:
-            hooks.after_article(audits)
+            _run_hook(hooks.after_article, say, "after-article repair", audits)
             if doc_num % config.repair_every_n_articles == 0:
                 say(f"periodic LLM repair after article {doc_num}")
-                hooks.periodic_fix()
+                _run_hook(hooks.periodic_fix, say, "periodic repair")
             index.rebuild()
 
     if hooks:
         say("finalization repair rounds")
-        hooks.finalize()
+        _run_hook(hooks.finalize, say, "finalization repair")
     store.rebuild_all_indexes()
     return report
+
+
+def _run_hook(fn, say, label: str, *args) -> None:
+    """Repair passes are best-effort: a failure (e.g. API overload during an
+    LLM check) is logged and deferred, never fatal to the build — validators
+    re-run at the next checkpoint and the error book persists findings."""
+    try:
+        fn(*args)
+    except Exception as exc:  # noqa: BLE001
+        say(f"HOOK FAILED ({label}): {type(exc).__name__}: {exc}")
 
 
 def load_documents(paths: list[Path]) -> list[Document]:
