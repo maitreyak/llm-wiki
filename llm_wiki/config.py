@@ -37,6 +37,7 @@ class WikiConfig:
     # judges — a wrong judgment destroys good facts; findings are always
     # recorded in the error book either way.
     judge_autoremove: bool = True
+    shed_cooldown_seconds: float = 120.0
 
     max_output_tokens: int = 8192
 

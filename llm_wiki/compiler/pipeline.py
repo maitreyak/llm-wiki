@@ -13,6 +13,7 @@ the pipeline runs without them (hooks=None) for compile-only use.
 from __future__ import annotations
 
 import re
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable, Protocol
@@ -128,12 +129,22 @@ def ingest(
                 retry_queue.append((source_id, passage))
                 consecutive_failures += 1
                 if consecutive_failures >= max_consecutive_failures:
-                    # Isolated passages fail for passage-specific reasons;
-                    # a streak means something systemic (billing, auth,
-                    # network) — abort instead of failing through the corpus.
+                    # A streak is either truly systemic (billing, auth, API
+                    # down — a tiny probe also fails: abort) or throughput
+                    # shedding of sustained traffic (probe succeeds: cool
+                    # down and push on; the retry queue recovers the skips).
+                    if _probe(llm, config):
+                        say(
+                            f"{consecutive_failures} consecutive failures but "
+                            f"probe OK — throughput shedding; cooling down "
+                            f"{config.shed_cooldown_seconds}s"
+                        )
+                        time.sleep(config.shed_cooldown_seconds)
+                        consecutive_failures = 0
+                        continue
                     raise RuntimeError(
                         f"aborting ingest: {consecutive_failures} consecutive "
-                        f"passage failures — last: {exc}"
+                        f"passage failures and probe failed — last: {exc}"
                     ) from exc
                 continue
             consecutive_failures = 0
@@ -186,6 +197,27 @@ def ingest(
         _run_hook(hooks.finalize, say, "finalization repair")
     store.rebuild_all_indexes()
     return report
+
+
+def _probe(llm, config) -> bool:
+    """Minimal single-attempt call to tell 'API is down' from 'API is
+    shedding our sustained traffic'."""
+    saved = getattr(llm, "max_attempts", None)
+    try:
+        if saved is not None:
+            llm.max_attempts = 1
+        llm.message(
+            model=config.compiler_model,
+            system="Reply with OK.",
+            messages=[{"role": "user", "content": "ok"}],
+            max_tokens=4,
+        )
+        return True
+    except Exception:  # noqa: BLE001
+        return False
+    finally:
+        if saved is not None:
+            llm.max_attempts = saved
 
 
 def _run_hook(fn, say, label: str, *args) -> None:
