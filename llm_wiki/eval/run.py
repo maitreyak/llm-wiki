@@ -90,7 +90,14 @@ def build_or_load_wiki(
         progress=echo,
     )
     echo(f"built: {report}; usage so far: {llm.usage}")
-    marker.write_text("ok\n")
+    total = report.passages + len(report.skipped)
+    if total and len(report.skipped) / total > 0.02:
+        echo(
+            f"WARNING: {len(report.skipped)}/{total} passages failed to compile — "
+            f"NOT caching this wiki as complete; rerun to rebuild when the API is healthy"
+        )
+    else:
+        marker.write_text("ok\n")
     return config, store
 
 
