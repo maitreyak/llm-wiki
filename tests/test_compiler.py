@@ -244,6 +244,26 @@ def test_pipeline_aborts_on_consecutive_failures(store):
         ingest(ExplodingLLM(), store.config, store, docs)
 
 
+def test_ingest_resume_skips_compiled_sources(store):
+    from llm_wiki.compiler.pipeline import Document, ingest
+
+    store.save_source("done", "already compiled")
+
+    class ExplodingLLM:  # would fail if any compile were attempted
+        def structured(self, **kwargs):
+            raise AssertionError("should not be called for resumed sources")
+
+    report = ingest(
+        ExplodingLLM(),
+        store.config,
+        store,
+        [Document(doc_id="done", text="already compiled")],
+        resume=True,
+    )
+    assert report.passages == 1
+    assert report.skipped == []
+
+
 def test_split_passages_packs_paragraphs():
     doc = Document(doc_id="d", text="a\n\nb\n\nc", title="T")
     parts = split_passages(doc, max_chars=1)

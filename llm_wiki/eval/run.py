@@ -69,11 +69,15 @@ def build_or_load_wiki(
         echo(f"reusing cached wiki at {root} ({len(store.all_names())} pages)")
         return config, store
 
-    echo(f"building wiki at {root} from {len(paragraphs)} paragraphs ...")
-    if root.exists():
-        import shutil
+    resume = root.exists() and (root / "sources").exists() and not rebuild
+    if resume:
+        echo(f"resuming interrupted build at {root} ({len(store.all_names())} pages exist)")
+    else:
+        echo(f"building wiki at {root} from {len(paragraphs)} paragraphs ...")
+        if root.exists():
+            import shutil
 
-        shutil.rmtree(root)
+            shutil.rmtree(root)
     store.init()
     docs = [
         Document(doc_id=slugify(title)[:60], text=text, title=title)
@@ -88,6 +92,7 @@ def build_or_load_wiki(
         hooks=hooks,
         constraints_fn=hooks.active_constraints,
         progress=echo,
+        resume=resume,
     )
     echo(f"built: {report}; usage so far: {llm.usage}")
     total = report.passages + len(report.skipped)

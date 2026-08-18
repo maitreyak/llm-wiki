@@ -98,6 +98,7 @@ def ingest(
     hooks: RepairHooks | None = None,
     constraints_fn: Callable[[], list[str]] | None = None,
     progress: Callable[[str], None] | None = None,
+    resume: bool = False,
 ) -> IngestReport:
     index = WikiSearchIndex(store)
     report = IngestReport()
@@ -109,6 +110,12 @@ def ingest(
     for doc_num, doc in enumerate(documents, start=1):
         audits: list[PassageAudit] = []
         for source_id, passage in split_passages(doc):
+            if resume and store.source_exists(source_id):
+                # Already compiled by an interrupted earlier run; its pages
+                # are on disk. (A kill between source-save and page-writes is
+                # a sub-second window; validators catch any inconsistency.)
+                report.passages += 1
+                continue
             say(f"[{doc_num}/{len(documents)}] compiling {source_id}")
             constraints = constraints_fn() if constraints_fn else []
             try:
