@@ -102,10 +102,26 @@ class LLM:
                 # Up to ~4.5 min of total patience — overload incidents flap
                 # for minutes at a time; skipping is costlier than waiting.
                 time.sleep(min(2**attempt * 2.0, 90.0))
+                self._refresh_client()
             except anthropic.APIConnectionError as exc:
                 last_exc = exc
                 time.sleep(2.0)
+                self._refresh_client()
         raise last_exc  # type: ignore[misc]
+
+    def _refresh_client(self) -> None:
+        """Replace the client (and its HTTP connection pool) before a retry.
+
+        Observed in the field: long-lived pooled connections started getting
+        every large streaming request shed with 529 'Overloaded' while the
+        same requests succeeded immediately from a fresh connection (and tiny
+        requests kept succeeding on the stale pool). A fresh pool re-lands on
+        a healthy edge."""
+        try:
+            self.client.close()
+        except Exception:  # noqa: BLE001
+            pass
+        self.client = anthropic.Anthropic()
 
     def structured(
         self,
