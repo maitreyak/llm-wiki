@@ -51,7 +51,7 @@ class TruncatedOutputError(RuntimeError):
 class LLM:
     client: anthropic.Anthropic = field(default_factory=anthropic.Anthropic)
     usage: Usage = field(default_factory=Usage)
-    max_attempts: int = 4
+    max_attempts: int = 6
 
     def message(
         self,
