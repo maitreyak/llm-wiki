@@ -1,0 +1,1 @@
+Sinister is a 2012 supernatural horror film directed by Scott Derrickson and co-written by Derrickson and C. Robert Cargill. Ethan Hawke stars as fictional true-crime writer Ellison Oswalt, who discovers a box of home movies in his attic that endangers his family.

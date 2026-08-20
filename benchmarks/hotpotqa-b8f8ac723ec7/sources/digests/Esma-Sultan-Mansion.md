@@ -1,0 +1,1 @@
+The Esma Sultan Mansion (Turkish: Esma Sultan Yalısı) is a historical yalı, or waterside mansion, situated on the Bosphorus in the Ortaköy neighborhood of Istanbul, Turkey. It is named after its original owner, Esma Sultan. After redevelopment, the building is used today as a cultural center.

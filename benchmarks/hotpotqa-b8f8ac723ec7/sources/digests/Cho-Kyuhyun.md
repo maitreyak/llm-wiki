@@ -1,0 +1,1 @@
+Cho Kyu-hyun (born February 3, 1988), known mononymously as Kyuhyun, is a South Korean singer and musical theatre actor. He is best known as a member of the boy group Super Junior and its sub-groups Super Junior-K.R.Y. and Super Junior-M, and is a former member of the ballad group S.M. the Ballad. He is one of the first four Korean artists to appear on Chinese postage stamps.

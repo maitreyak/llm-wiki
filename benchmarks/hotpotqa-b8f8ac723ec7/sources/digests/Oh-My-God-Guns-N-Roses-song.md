@@ -1,0 +1,1 @@
+"Oh My God" is a 1999 Guns N' Roses song released on the soundtrack to the film End of Days. It was sent to radio stations in November 1999 as a promo for the soundtrack and band. Though it was the band's first recorded release in nearly five years, it was never issued as a stand-alone retail single.

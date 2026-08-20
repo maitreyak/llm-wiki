@@ -1,0 +1,1 @@
+Brown County (county code BR) is a county in northeast Kansas with a 2010 census population of 9,984, whose county seat and largest city is Hiawatha. The county contains the Kickapoo Indian Reservation of Kansas, the majority of the Sac and Fox Reservation, and the majority of the Iowa Reservation of Kansas and Nebraska.

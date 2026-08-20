@@ -1,0 +1,1 @@
+Scott Derrickson (born July 16, 1966) is an American director, screenwriter and producer who lives in Los Angeles, California. He is best known for directing horror films including "Sinister", "The Exorcism of Emily Rose", and "Deliver Us From Evil", as well as the 2016 Marvel Cinematic Universe film "Doctor Strange".

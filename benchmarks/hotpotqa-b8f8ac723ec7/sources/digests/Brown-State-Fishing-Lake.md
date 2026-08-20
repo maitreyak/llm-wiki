@@ -1,0 +1,1 @@
+Brown State Fishing Lake, also called Brown State Fishing Lake And Wildlife Area, is a protected area in Brown County, Kansas, United States. The lake covers 62 acres (0.25 km²) and reaches up to 13 feet (4 m) deep. Formerly known as Brown County State Park, it lies 8 miles (13 km) east of Hiawatha, Kansas.

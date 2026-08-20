@@ -1,0 +1,1 @@
+Shirley Temple Black (April 23, 1928 – February 10, 2014) was an American actress, singer, dancer, businesswoman, and diplomat, and Hollywood's number one box-office draw as a child actress from 1935 to 1938. As an adult she served as United States ambassador to Ghana and to Czechoslovakia, and as Chief of Protocol of the United States.

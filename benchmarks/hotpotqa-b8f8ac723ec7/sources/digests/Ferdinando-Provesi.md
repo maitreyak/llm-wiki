@@ -1,0 +1,1 @@
+Ferdinando Angelo Maria Provesi (1770–1833) was a Parma-born Italian composer regarded as one of the greatest opera composers of his era. As Maestro di cappella at the St. Bartolomeo cathedral in Busseto, he became an early tutor of Giuseppe Verdi, beginning in 1824 when Verdi was 11. He also directed Busseto's municipal music school and local Philharmonic Society.

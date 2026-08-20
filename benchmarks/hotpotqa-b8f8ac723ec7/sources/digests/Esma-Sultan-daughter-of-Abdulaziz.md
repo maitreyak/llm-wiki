@@ -1,0 +1,1 @@
+Esma Sultan (21 March 1873 – 7 May 1899) was an Ottoman princess, daughter of Sultan Abdülaziz and his wife Gevheri Kadın, who was herself a daughter of Salih Bey Svatnba. She was the half-sister of Abdülmecid II, the last Caliph of the Muslim world.

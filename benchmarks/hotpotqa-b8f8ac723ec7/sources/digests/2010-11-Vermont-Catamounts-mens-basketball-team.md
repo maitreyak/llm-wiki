@@ -1,0 +1,1 @@
+The 2010–11 Vermont Catamounts men's basketball team represented the University of Vermont in the 2010–11 NCAA Division I season. The team won a third straight America East Conference regular season championship but lost in the conference tournament semifinals to Stony Brook. Invited to the NIT, Vermont fell 63–60 to Cleveland State in the first round.

@@ -1,0 +1,1 @@
+Local H is an American rock band originally formed in Zion, Illinois in 1987 by guitarist/vocalist Scott Lucas, bassist Matt Garcia, drummer Joe Daniels, and lead guitarist John Sparkman. The members met in high school in 1987 and founded the band three years later.

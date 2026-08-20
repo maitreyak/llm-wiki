@@ -1,0 +1,1 @@
+The R509 road is a regional road in Ireland that follows part of the Childers Road, which is named after Erskine Childers. It runs through the southeastern side of Limerick City and functions somewhat like an inner ring road, though it is mostly only two lanes.

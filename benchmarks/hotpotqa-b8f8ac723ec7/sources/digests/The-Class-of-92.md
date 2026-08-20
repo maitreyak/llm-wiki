@@ -1,0 +1,1 @@
+The Class of '92 is a 2013 British documentary film released on 1 December 2013. It centres on the rise of six young Manchester United footballers — David Beckham, Nicky Butt, Ryan Giggs, Gary Neville, Phil Neville and Paul Scholes — and details their Manchester United careers starting in 1992.

@@ -1,0 +1,1 @@
+Eenasul Fateh (Bengali: ঈনাসুল ফাতেহ), born 3 April 1959, is a Bangladeshi-British cultural practitioner, magician and live artist. He is also known by his stage name Aladin and is a former international management consultant.

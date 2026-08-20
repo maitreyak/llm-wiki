@@ -1,0 +1,1 @@
+The Robert and Concetta Dwyer Arena, located on Niagara University's campus in Lewiston, New York, contains two 200 x 85 ft ice surfaces and a pro shop. Its main rink seats up to 1,400 and hosts the Niagara Purple Eagles men's ice hockey team of Atlantic Hockey. The arena was formerly home to the school's women's ice hockey team, which played in College Hockey America.

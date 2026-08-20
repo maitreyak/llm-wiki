@@ -1,0 +1,1 @@
+Management consulting is the practice of helping organizations improve performance, mainly by analyzing existing organizational problems and developing improvement plans. Organizations hire management consultants for reasons including obtaining external, presumably objective advice and access to consultants' specialized expertise.

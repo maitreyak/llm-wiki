@@ -1,0 +1,1 @@
+Drive Angry is a 2011 American fantasy action film directed by Patrick Lussier and starring Nicolas Cage and Amber Heard. Released on February 25, 2011 and shot in 3-D, it received mixed reviews and grossed almost $29 million.

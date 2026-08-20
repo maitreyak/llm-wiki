@@ -1,0 +1,1 @@
+Animorphs is a science fantasy young adult book series by Katherine Applegate and Michael Grant, published under the joint pen name K. A. Applegate by Scholastic. It is narrated in first person by six main characters who take turns telling the story. Core themes include horror, war, dehumanization, sanity, morality, innocence, leadership, freedom and growing up.

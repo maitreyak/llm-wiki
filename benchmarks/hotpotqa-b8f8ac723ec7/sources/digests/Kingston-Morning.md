@@ -1,0 +1,1 @@
+Kingston Morning is Dave Eggar's fourth solo release, recorded in Brooklyn, New York; Kingston, Jamaica; and Big Stone Gap, Virginia, and released by Domo Records. Its track "Itsbynne Reel" was nominated for Best Instrumental Arrangement at the 53rd Grammy Awards.

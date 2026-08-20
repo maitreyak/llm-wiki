@@ -1,0 +1,291 @@
+{
+  "dataset": "hotpotqa",
+  "n": 20,
+  "summary": {
+    "f1": 0.53428,
+    "em": 0.35,
+    "n": 20,
+    "avg_tool_calls": 3.45,
+    "by_type": {
+      "comparison": {
+        "f1": 0.30951666666666666,
+        "em": 0.16666666666666666,
+        "n": 6
+      },
+      "bridge": {
+        "f1": 0.6306071428571428,
+        "em": 0.42857142857142855,
+        "n": 14
+      }
+    },
+    "by_hops": {
+      "2": {
+        "f1": 0.53428,
+        "em": 0.35,
+        "n": 20
+      }
+    }
+  },
+  "results": [
+    {
+      "qid": "5a8b57f25542995d1e6f1371",
+      "question": "Were Scott Derrickson and Ed Wood of the same nationality?",
+      "gold": "yes",
+      "prediction": "Yes, Scott Derrickson and Ed Wood were of the same nationality.",
+      "f1": 0.0,
+      "em": 0.0,
+      "qtype": "comparison",
+      "hops": 2,
+      "tool_calls": 3,
+      "stop_reason": "answered",
+      "seconds": 31.3
+    },
+    {
+      "qid": "5a8c7595554299585d9e36b6",
+      "question": "What government position was held by the woman who portrayed Corliss Archer in the film Kiss and Tell?",
+      "gold": "Chief of Protocol",
+      "prediction": "Chief of Protocol of the United States (also served as U.S. Ambassador to Ghana and Czechoslovakia)",
+      "f1": 0.3333,
+      "em": 0.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 3,
+      "stop_reason": "answered",
+      "seconds": 6.3
+    },
+    {
+      "qid": "5a85ea095542994775f606a8",
+      "question": "What science fantasy young adult series, told in first person, has a set of companion books narrating the stories of enslaved worlds and alien species?",
+      "gold": "Animorphs",
+      "prediction": "Animorphs",
+      "f1": 1.0,
+      "em": 1.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 4,
+      "stop_reason": "answered",
+      "seconds": 6.8
+    },
+    {
+      "qid": "5adbf0a255429947ff17385a",
+      "question": "Are the Laleli Mosque and Esma Sultan Mansion located in the same neighborhood?",
+      "gold": "no",
+      "prediction": "No, they are not located in the same neighborhood.",
+      "f1": 0.0,
+      "em": 0.0,
+      "qtype": "comparison",
+      "hops": 2,
+      "tool_calls": 3,
+      "stop_reason": "answered",
+      "seconds": 5.4
+    },
+    {
+      "qid": "5a8e3ea95542995a26add48d",
+      "question": "The director of the romantic comedy \"Big Stone Gap\" is based in what New York city?",
+      "gold": "Greenwich Village, New York City",
+      "prediction": "Greenwich Village",
+      "f1": 0.5714,
+      "em": 0.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 2,
+      "stop_reason": "answered",
+      "seconds": 4.9
+    },
+    {
+      "qid": "5abd94525542992ac4f382d2",
+      "question": "2014 S/S is the debut album of a South Korean boy group that was formed by who?",
+      "gold": "YG Entertainment",
+      "prediction": "YG Entertainment",
+      "f1": 1.0,
+      "em": 1.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 2,
+      "stop_reason": "answered",
+      "seconds": 4.8
+    },
+    {
+      "qid": "5a85b2d95542997b5ce40028",
+      "question": "Who was known by his stage name Aladin and helped organizations improve their performance as a consultant?",
+      "gold": "Eenasul Fateh",
+      "prediction": "Eenasul Fateh",
+      "f1": 1.0,
+      "em": 1.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 2,
+      "stop_reason": "answered",
+      "seconds": 3.9
+    },
+    {
+      "qid": "5a87ab905542996e4f3088c1",
+      "question": "The arena where the Lewiston Maineiacs played their home games can seat how many people?",
+      "gold": "3,677 seated",
+      "prediction": "4,000",
+      "f1": 0.0,
+      "em": 0.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 2,
+      "stop_reason": "answered",
+      "seconds": 5.4
+    },
+    {
+      "qid": "5a7bbb64554299042af8f7cc",
+      "question": "Who is older, Annie Morton or Terry Richardson?",
+      "gold": "Terry Richardson",
+      "prediction": "Terry Richardson is older.",
+      "f1": 0.6667,
+      "em": 0.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 3,
+      "stop_reason": "answered",
+      "seconds": 4.2
+    },
+    {
+      "qid": "5a8db19d5542994ba4e3dd00",
+      "question": "Are Local H and For Against both from the United States?",
+      "gold": "yes",
+      "prediction": "Yes, both Local H and For Against are from the United States.",
+      "f1": 0.0,
+      "em": 0.0,
+      "qtype": "comparison",
+      "hops": 2,
+      "tool_calls": 3,
+      "stop_reason": "answered",
+      "seconds": 6.5
+    },
+    {
+      "qid": "5a7166395542994082a3e814",
+      "question": "What is the name of the fight song of the university whose main campus is in Lawrence, Kansas and whose branch campuses are in the Kansas City metropolitan area?",
+      "gold": "Kansas Song",
+      "prediction": "Kansas Song (also known as \"We're From Kansas\")",
+      "f1": 0.4,
+      "em": 0.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 3,
+      "stop_reason": "answered",
+      "seconds": 5.4
+    },
+    {
+      "qid": "5a877e5d5542993e715abf7d",
+      "question": "What screenwriter with credits for \"Evolution\" co-wrote a film starring Nicolas Cage and T\u00e9a Leoni?",
+      "gold": "David Weissman",
+      "prediction": "David Weissman",
+      "f1": 1.0,
+      "em": 1.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 5,
+      "stop_reason": "answered",
+      "seconds": 6.8
+    },
+    {
+      "qid": "5ab3b0bf5542992ade7c6e39",
+      "question": "What year did Guns N Roses perform a promo for a movie starring Arnold Schwarzenegger as a former New York Police detective?",
+      "gold": "1999",
+      "prediction": "1999",
+      "f1": 1.0,
+      "em": 1.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 3,
+      "stop_reason": "answered",
+      "seconds": 6.5
+    },
+    {
+      "qid": "5ab56e32554299637185c594",
+      "question": "Are Random House Tower and 888 7th Avenue both used for real estate?",
+      "gold": "no",
+      "prediction": "No, they are not both used for real estate. Random House Tower is a mixed-use building (publishing headquarters and residential apartments), while 888 7th Avenue is an office building.",
+      "f1": 0.0,
+      "em": 0.0,
+      "qtype": "comparison",
+      "hops": 2,
+      "tool_calls": 3,
+      "stop_reason": "answered",
+      "seconds": 6.1
+    },
+    {
+      "qid": "5ab6d09255429954757d337d",
+      "question": "The football manager who recruited David Beckham managed Manchester United during what timeframe?",
+      "gold": "from 1986 to 2013",
+      "prediction": "1986 to 2013",
+      "f1": 0.8571,
+      "em": 0.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 2,
+      "stop_reason": "answered",
+      "seconds": 4.7
+    },
+    {
+      "qid": "5a75e05c55429976ec32bc5f",
+      "question": "Brown State Fishing Lake is in a country that has a population of how many inhabitants ?",
+      "gold": "9,984",
+      "prediction": "The Wiki does not provide the population of the United States.",
+      "f1": 0.0,
+      "em": 0.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 14,
+      "stop_reason": "answered",
+      "seconds": 22.6
+    },
+    {
+      "qid": "5ab3e45655429976abd1bcd4",
+      "question": "The Vermont Catamounts men's soccer team currently competes in a conference that was formerly known as what from 1988 to 1996?",
+      "gold": "the North Atlantic Conference",
+      "prediction": "North Atlantic Conference",
+      "f1": 1.0,
+      "em": 1.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 3,
+      "stop_reason": "answered",
+      "seconds": 6.0
+    },
+    {
+      "qid": "5ab29c24554299449642c932",
+      "question": "Are Giuseppe Verdi and Ambroise Thomas both Opera composers ?",
+      "gold": "yes",
+      "prediction": "Yes",
+      "f1": 1.0,
+      "em": 1.0,
+      "qtype": "comparison",
+      "hops": 2,
+      "tool_calls": 3,
+      "stop_reason": "answered",
+      "seconds": 4.3
+    },
+    {
+      "qid": "5ae0d4c9554299603e418468",
+      "question": "Roger O. Egeberg was Assistant Secretary for Health and Scientific Affairs during the administration of a president that served during what years?",
+      "gold": "1969 until 1974",
+      "prediction": "1969\u20131974",
+      "f1": 0.0,
+      "em": 0.0,
+      "qtype": "bridge",
+      "hops": 2,
+      "tool_calls": 3,
+      "stop_reason": "answered",
+      "seconds": 6.3
+    },
+    {
+      "qid": "5a8133725542995ce29dcbdb",
+      "question": "Which writer was from England, Henry Roth or Robert Erskine Childers?",
+      "gold": "Robert Erskine Childers DSC",
+      "prediction": "Robert Erskine Childers",
+      "f1": 0.8571,
+      "em": 0.0,
+      "qtype": "comparison",
+      "hops": 2,
+      "tool_calls": 3,
+      "stop_reason": "answered",
+      "seconds": 7.0
+    }
+  ]
+}

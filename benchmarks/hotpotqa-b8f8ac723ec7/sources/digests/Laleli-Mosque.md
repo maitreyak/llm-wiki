@@ -1,0 +1,1 @@
+The Laleli Mosque (Turkish: Laleli Camii, or Tulip Mosque) is an 18th-century Ottoman imperial mosque. It is located in the Laleli area of the Fatih district of Istanbul, Turkey.

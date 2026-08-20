@@ -1,0 +1,1 @@
+The 1996 FA Charity Shield (Littlewoods FA Charity Shield) was the 74th edition of the annual match between the previous season's Premier League and FA Cup winners, played on 11 August 1996 at Wembley Stadium. Manchester United, 1995–96 Double winners, beat Premier League runners-up Newcastle United 4–0. The scorers were Eric Cantona, Nicky Butt, David Beckham and Roy Keane.

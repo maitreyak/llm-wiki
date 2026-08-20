@@ -1,0 +1,1 @@
+The Androscoggin Bank Colisée, formerly known as the Central Maine Civic Center and Lewiston Colisee, is a multi-purpose arena in Lewiston, Maine with a capacity of 4,000 (3,677 seated), opened in 1958. In 1965 it hosted a World Heavyweight Title fight, at which one of the century's most famous sports photographs — Muhammed Ali standing over Sonny Liston — was taken.

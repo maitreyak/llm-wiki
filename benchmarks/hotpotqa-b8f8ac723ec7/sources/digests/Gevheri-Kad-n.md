@@ -1,0 +1,1 @@
+Gevheri Kadın (8 July 1856 – 6 September 1884) was the fifth wife of Abdülaziz, the 32nd Ottoman Sultan. She was the mother of Şehzade Mehmed Seyfeddin and of Esma Sultan of the Ottoman Empire.

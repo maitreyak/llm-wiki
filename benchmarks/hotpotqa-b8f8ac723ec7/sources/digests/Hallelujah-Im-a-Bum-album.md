@@ -1,0 +1,1 @@
+Hallelujah! I'm A Bum is the seventh studio album by Chicago rock band Local H, described in interviews as a concept album about politics in the United States. Completed in spring 2012, its release was held until September to fall closer to the 2012 presidential election. The album uses sounds of Chicago's El Train to transition between songs.

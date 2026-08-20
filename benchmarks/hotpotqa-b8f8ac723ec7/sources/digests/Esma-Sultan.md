@@ -1,0 +1,1 @@
+The passage is a brief disambiguation note stating that "Esma Sultan" is the name borne by three daughters of three different Ottoman Sultans. No further details about the individuals are given.

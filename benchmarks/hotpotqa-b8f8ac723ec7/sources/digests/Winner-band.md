@@ -1,0 +1,1 @@
+Winner (Hangul: 위너), stylized WINNER, is a South Korean boy group formed in 2013 by YG Entertainment and debuted in 2014. It currently consists of four members: Jinwoo, Seunghoon, Mino and Seungyoon. It was originally a five-piece group including Taehyun, who departed in November 2016.

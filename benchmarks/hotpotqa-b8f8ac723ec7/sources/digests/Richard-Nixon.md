@@ -1,0 +1,1 @@
+Richard Milhous Nixon (January 9, 1913 – April 22, 1994) was the 37th President of the United States from 1969 to 1974, and the only U.S. president to resign from office. He earlier served as the 36th Vice President from 1953 to 1961, and before that as a U.S. Representative and Senator from California.

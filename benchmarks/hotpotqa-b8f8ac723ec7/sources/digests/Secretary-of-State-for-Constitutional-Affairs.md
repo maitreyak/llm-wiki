@@ -1,0 +1,1 @@
+The Secretary of State for Constitutional Affairs was a British Government office created in 2003, taking over certain functions of the Lord Chancellor relating to the Lord Chancellor's Department. Further functions were later transferred to it from the First Secretary of State, a post held by the Deputy Prime Minister.

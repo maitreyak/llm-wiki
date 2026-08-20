@@ -1,0 +1,1 @@
+The Carl B. Stokes Federal Court House Building is a 23-story, 430 ft skyscraper in downtown Cleveland, Ohio, at the corner of Huron Road and Superior Avenue. Also known as the Stokes Tower and Federal Court House Tower, it is the fourth tallest United States courthouse in the country.

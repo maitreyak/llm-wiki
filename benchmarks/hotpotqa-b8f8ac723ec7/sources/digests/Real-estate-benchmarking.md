@@ -1,0 +1,1 @@
+Real estate benchmarking is the standard of measurement used to analyze the financial characteristics of a real estate investment property. Broadly, it refers to comparing potential real estate investment properties against a predetermined framework of measurement. Narrowly, the term refers to the specific real estate indicators used to measure real estate properties.

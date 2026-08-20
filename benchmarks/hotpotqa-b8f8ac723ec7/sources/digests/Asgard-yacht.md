@@ -1,0 +1,1 @@
+Asgard is a 51 ft gaff rigged yacht owned by English-born writer and Irish nationalist Erskine Childers and his wife Molly Childers. She is best known for her role in the Howth gun-running of 1914.

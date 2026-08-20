@@ -1,0 +1,1 @@
+Janet Marie Waldo (February 4, 1920 – June 12, 2016) was an American radio and voice actress. In animation she was best known for voicing Judy Jetson, Nancy in "Shazzan", Penelope Pitstop, and Josie in "Josie and the Pussycats". On radio she was known as the title character in "Meet Corliss Archer".

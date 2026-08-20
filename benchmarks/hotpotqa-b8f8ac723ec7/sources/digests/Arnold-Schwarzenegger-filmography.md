@@ -1,0 +1,1 @@
+Arnold Schwarzenegger is an actor with over 30 film appearances who has also directed and produced. He started with small film and television roles, was credited as "Arnold Strong" in his first film before using his birth name, and worked mainly in action and comedy. He has also appeared in music videos for AC/DC, Bon Jovi, and Guns N' Roses.

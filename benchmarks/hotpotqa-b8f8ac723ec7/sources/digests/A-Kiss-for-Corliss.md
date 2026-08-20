@@ -1,0 +1,1 @@
+A Kiss for Corliss is a 1949 American comedy film directed by Richard Wallace, written by Howard Dimsdale, and starring Shirley Temple in her final starring role and final film appearance. It is a sequel to the 1945 film Kiss and Tell. Retitled Almost a Bride before release (the title appearing in the title sequence), it was released on November 25, 1949, by United Artists.

@@ -1,0 +1,1 @@
+The Vermont Catamounts men's basketball team represents the University of Vermont in Burlington, competing in the America East Conference and playing home games at Patrick Gym. The team has made six NCAA Division I Tournament appearances (2003, 2004, 2005, 2010, 2012, 2017), famously upsetting Syracuse in the first round of the 2005 tournament. John Becker is the team's coach.

@@ -74,7 +74,9 @@ class WikiConfig:
 
     def save(self) -> None:
         data = asdict(self)
-        data["root"] = str(self.root)
+        # root is derived from the wiki's location; persisting it would bake
+        # in a machine-specific absolute path (wikis are moved/checked in).
+        data.pop("root", None)
         self.config_path.parent.mkdir(parents=True, exist_ok=True)
         self.config_path.write_text(json.dumps(data, indent=2) + "\n")
 
@@ -84,6 +86,6 @@ class WikiConfig:
         path = root / CONFIG_FILENAME
         if path.exists():
             data = json.loads(path.read_text())
-            data["root"] = root
+            data["root"] = root  # ignore any legacy persisted root
             return cls(**data)
         return cls(root=root)

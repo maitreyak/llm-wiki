@@ -1,0 +1,1 @@
+Kenton Terry Richardson, born 26 July 1999, is an English professional footballer. He plays as a defender for Hartlepool United of League Two.

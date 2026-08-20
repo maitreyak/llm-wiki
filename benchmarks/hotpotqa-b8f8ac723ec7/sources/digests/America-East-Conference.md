@@ -1,0 +1,1 @@
+The America East Conference is an NCAA Division I collegiate athletic conference whose members are located mainly in the Northeastern United States. It was previously named the Eastern College Athletic Conference-North (1979–1988) and the North Atlantic Conference (1988–1996).

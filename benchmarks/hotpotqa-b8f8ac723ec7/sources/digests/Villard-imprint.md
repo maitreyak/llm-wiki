@@ -1,0 +1,1 @@
+Villard, also known as Villard Books, is a publishing imprint of Random House founded in 1983. It began as an independent Random House imprint and is now a sub-imprint of Ballantine Books, itself a Random House imprint. The name comes from a Stanford White brownstone mansion on Madison Avenue that served as Random House's home for twenty years.

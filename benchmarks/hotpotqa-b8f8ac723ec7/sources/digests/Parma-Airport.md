@@ -1,0 +1,1 @@
+Parma Airport (IATA: PMF, ICAO: LIMP), also known as Giuseppe Verdi Airport, lies 1.3 NM northwest of Parma in Italy's Emilia-Romagna region. It opened on 5 May 1991 and is named after the composer Giuseppe Verdi.

@@ -1,0 +1,1 @@
+For Against is an American post-punk/dream pop band formed in 1984 in Lincoln, Nebraska. Despite frequent lineup changes and periods of dormancy, the band has continued to produce material steadily from its inception to the present.

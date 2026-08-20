@@ -1,0 +1,1 @@
+The William H. Cook Water Tank House, southeast of Jerome, Idaho, was built around 1915 of lava rock with a metal tank to store water for William H. Cook's farm. The rectangular building's stone craftsmanship resembles that of local stonemason H. T. Pugh, but its builder remains undetermined.

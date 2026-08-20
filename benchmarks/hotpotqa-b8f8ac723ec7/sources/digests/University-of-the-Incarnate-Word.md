@@ -1,0 +1,1 @@
+The University of the Incarnate Word (UIW) is a private Catholic university with its main campus in San Antonio and Alamo Heights, Texas. It was founded in 1881 by the Sisters of Charity of the Incarnate Word, and its main campus occupies 154 acres.

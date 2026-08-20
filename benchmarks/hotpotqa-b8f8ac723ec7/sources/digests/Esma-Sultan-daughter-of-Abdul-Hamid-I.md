@@ -1,0 +1,1 @@
+Esma Sultan (17 July 1778 – 4 June 1848) was an Ottoman princess, the daughter of Sultan Abdul Hamid I and sister of Sultans Mustafa IV and Mahmud II. She was the adoptive mother of Bezmiâlem Sultan and Rahime Perestu Sultan.

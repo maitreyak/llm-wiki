@@ -1,0 +1,1 @@
+Clinton is a city located in Big Stone County, Minnesota, United States. It was named after New York Governor DeWitt Clinton. Its population was recorded as 449 in the 2010 census.

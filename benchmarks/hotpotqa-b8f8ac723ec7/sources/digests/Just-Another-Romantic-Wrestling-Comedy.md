@@ -1,0 +1,1 @@
+Just Another Romantic Wrestling Comedy is a 2006 romantic comedy film starring April Hunter and Joanie Laurer. It premiered in New Jersey and New York City on December 1, 2006, and was released on DVD in the US and UK on April 17, 2007 by Victory Multimedia. After its DVD release it won an "Honorable Mention" award at the New Jersey International Festival awards.

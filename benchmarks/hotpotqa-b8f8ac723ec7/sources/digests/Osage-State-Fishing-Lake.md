@@ -1,0 +1,1 @@
+Osage State Fishing Lake is a 140-acre man-made freshwater lake built in 1955 in northern Osage County, Kansas, a mile east of US 75. It sits within a 366-acre parkland of mostly tall grass prairie with wooded areas and is owned by the State of Kansas. Scranton lies to its northwest and Overbrook to its northeast.

@@ -1,0 +1,1 @@
+Adam Collis is an American filmmaker and actor who studied at Duke University (1986–1990), UCLA (2007–2010), and cinema at the University of Southern California (1991–1997). His first work was as assistant director on Scott Derrickson's 1995 short "Love in the Ruins," and in 1998 he played "Crankshaft" in Eric Koyanagi's "Hundred Percent."

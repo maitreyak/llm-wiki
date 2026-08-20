@@ -1,0 +1,1 @@
+The Billings Bulls were a junior ice hockey organization based in Billings, Montana. They most recently played at the 550-seat Centennial Ice Arena, where small capacity meant frequent sellouts, after previously playing at Metrapark (max hockey capacity 9,000). A negotiating dispute with arena officials and local county commissioners caused the team to lose its Metrapark lease.

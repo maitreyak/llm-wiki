@@ -1,0 +1,1 @@
+Sir Matt Busby (26 May 1909 – 20 January 1994) was a Scottish football player and manager who managed Manchester United from 1945 to 1969 and again in the second half of the 1970–71 season. Widely regarded as one of the greatest managers of all time, his managerial records and longevity at Manchester United are surpassed only by Sir Alex Ferguson.

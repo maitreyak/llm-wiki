@@ -1,0 +1,1 @@
+The Family Man is a 2000 American romantic comedy-drama directed by Brett Ratner, written by David Diamond and David Weissman, and starring Nicolas Cage and Téa Leoni. Nicolas Cage's production company, Saturn Films, helped produce the film. The story centers on a man who sees what his life could have been had he made a different decision 13 years earlier.

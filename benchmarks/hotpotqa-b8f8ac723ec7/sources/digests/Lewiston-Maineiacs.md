@@ -1,0 +1,1 @@
+The Lewiston Maineiacs were a junior ice hockey team in the Quebec Major Junior Hockey League based in Lewiston, Maine, playing home games at the Androscoggin Bank Colisée. They were the second QMJHL team located in the United States and the only one to play a full season. They won the President's Cup in 2007.

@@ -1,0 +1,1 @@
+The passage introduces the discography of Seventeen, a South Korean boy group formed by Pledis Entertainment in 2015, also stylized as SEVENTEEN or SVT. As of the document, the group had released one album and four EPs.

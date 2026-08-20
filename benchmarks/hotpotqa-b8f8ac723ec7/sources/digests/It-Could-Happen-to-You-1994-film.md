@@ -1,0 +1,1 @@
+It Could Happen to You is a 1994 American romantic comedy-drama starring Nicolas Cage and Bridget Fonda. Cage plays a New York City police officer who wins the lottery and splits his winnings with a waitress played by Fonda. The basic premise was inspired by a real-life incident.

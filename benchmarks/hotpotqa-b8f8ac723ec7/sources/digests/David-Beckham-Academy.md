@@ -1,0 +1,1 @@
+The David Beckham Academy was a football school founded by England international David Beckham in 2005. In 2009 it operated in two locations, London (UK) and Los Angeles, California (US). It pulled out of the London site at the end of its lease in October 2009, and the California branch closed soon after.

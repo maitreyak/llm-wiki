@@ -1,0 +1,1 @@
+Adriana Trigiani is an Italian American best-selling author of sixteen books, as well as a television writer, film director, and entrepreneur. She is based in Greenwich Village, New York City, and has published a novel a year since 2000.

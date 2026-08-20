@@ -1,0 +1,1 @@
+Etiquette & Espionage is a young adult steampunk novel by Gail Carriger, her first for young adult readers. It takes place in the same universe as her bestselling adult series, the Parasol Protectorate.

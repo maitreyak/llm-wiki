@@ -1,0 +1,1 @@
+Time to Kill (Italian: Tempo di uccidere) is a 1989 Italian drama film directed by Giuliano Montaldo, starring Nicolas Cage alongside Italian actors Ricky Tognazzi and Giancarlo Giannini. Set in 1936 when Ethiopia was an Italian colony, it was filmed in Zimbabwe. The film is based on the novel of the same name by Ennio Flaiano.

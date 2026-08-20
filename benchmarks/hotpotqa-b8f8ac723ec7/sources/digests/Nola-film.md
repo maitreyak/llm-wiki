@@ -1,0 +1,1 @@
+Nola is a 2003 American romantic comedy film written and directed by Alan Hruska, about a young woman struggling to survive in New York City while searching for her birth father. It premiered in New York City on July 23, 2004.

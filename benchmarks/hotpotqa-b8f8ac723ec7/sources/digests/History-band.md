@@ -1,0 +1,1 @@
+History (히스토리) was a South Korean boy group formed by LOEN Entertainment in 2013, becoming the label's first boy group. They debuted on April 26, 2013 with "Dreamer", which featured narration by labelmate IU. The group officially disbanded on May 12, 2017.

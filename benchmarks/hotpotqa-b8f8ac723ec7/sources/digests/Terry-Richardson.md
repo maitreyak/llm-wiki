@@ -1,0 +1,1 @@
+Terrence "Uncle Terry" Richardson (born August 14, 1965) is an American fashion and portrait photographer. He has shot advertising campaigns for brands including Marc Jacobs, Aldo, Supreme, Sisley, Tom Ford, and Yves Saint Laurent. He has also worked for magazines such as Rolling Stone, GQ, Vogue, Vanity Fair, Harper's Bazaar, i-D, and Vice.

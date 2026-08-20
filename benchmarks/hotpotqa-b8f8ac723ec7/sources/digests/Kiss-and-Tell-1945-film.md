@@ -1,0 +1,1 @@
+Kiss and Tell is a 1945 American comedy film starring 17-year-old Shirley Temple as Corliss Archer. Its plot follows two teenage girls whose new interest in boys alarms their parents, whose bickering over which girl is the worse influence makes matters worse.

@@ -1,0 +1,1 @@
+Deadfall is a 1993 crime drama directed by Christopher Coppola, who co-wrote the script with Nick Vallelonga. It stars Michael Biehn, Nicolas Cage, Charlie Sheen, James Coburn, and Peter Fonda, and inspired the song 'Deadfall' by the American hardcore punk band Snot. A prequel/sequel, Arsenal, starring Nicolas Cage as his character Eddie King, was released in 2017.

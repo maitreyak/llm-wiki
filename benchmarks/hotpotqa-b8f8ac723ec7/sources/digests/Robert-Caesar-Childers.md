@@ -1,0 +1,1 @@
+Robert Caesar Childers (1838 – 25 July 1876) was a British Orientalist scholar who compiled the first Pāli-English dictionary. He married Anna Barton of Ireland, fathered the Irish nationalist Robert Erskine Childers, and was grandfather of Erskine Hamilton Childers, fourth President of Ireland.

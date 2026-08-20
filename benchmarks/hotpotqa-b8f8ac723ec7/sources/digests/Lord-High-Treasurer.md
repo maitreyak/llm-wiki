@@ -1,0 +1,1 @@
+The Lord High Treasurer (or Lord Treasurer) was an English government post that became a British one after the 1707 Acts of Union. The holder ranked as the third-highest Great Officer of State, below the Lord High Steward and the Lord High Chancellor.

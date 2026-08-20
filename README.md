@@ -39,6 +39,12 @@ llm-wiki status ./mywiki                     # pages, links, open errors
 llm-wiki eval hotpotqa --n 50                # benchmark run (cached wiki builds)
 ```
 
+A pre-built HotpotQA benchmark wiki (n=20 corpus: 199 paragraphs → 990 pages, compiled with claude-haiku-4-5) is checked in under `benchmarks/`, alongside the baseline results (F1 0.534 / EM 0.35). Reuse it — the expensive build step is skipped:
+
+```sh
+llm-wiki eval hotpotqa --n 20 --cache-dir benchmarks
+```
+
 ## Smoke test
 
 With credentials set, this exercises the full loop — compile a tiny corpus, then answer a multi-hop comparison question that requires traversing film → director → birth-date evidence across pages:

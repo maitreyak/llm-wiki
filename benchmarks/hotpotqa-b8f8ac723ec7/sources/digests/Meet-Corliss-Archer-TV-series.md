@@ -1,0 +1,1 @@
+Meet Corliss Archer was an American television sitcom that aired on CBS from July 13, 1951 to August 10, 1951 and in syndication via the Ziv Company from April to December 1954. The program adapted the radio series of the same name, which itself was based on a series of short stories by F. Hugh Herbert.
