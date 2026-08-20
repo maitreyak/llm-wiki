@@ -1,0 +1,1 @@
+Adam Collis is an American filmmaker and actor who attended Duke University (1986-1990), USC's cinema program (1991-1997), and UCLA (2007-2010). His first work was as assistant director on Scott Derrickson's 1995 short 'Love in the Ruins'; in 1998 he acted in Eric Koyanagi's 'Hundred Percent'.

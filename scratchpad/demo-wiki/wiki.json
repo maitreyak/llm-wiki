@@ -1,0 +1,17 @@
+{
+  "provider": "claude-cli",
+  "compiler_model": "claude-haiku-4-5",
+  "agent_model": "claude-haiku-4-5",
+  "judge_model": "claude-haiku-4-5",
+  "ollama_base_url": "http://localhost:11434",
+  "ollama_num_ctx": 16384,
+  "select_pages_k": 5,
+  "agent_max_tool_calls": 15,
+  "agent_patience": 3,
+  "repair_every_n_articles": 10,
+  "finalization_rounds": 3,
+  "contradiction_sample_pairs": 20,
+  "judge_autoremove": true,
+  "shed_cooldown_seconds": 120.0,
+  "max_output_tokens": 8192
+}

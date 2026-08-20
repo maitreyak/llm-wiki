@@ -1,0 +1,1 @@
+Ed Wood (Edward Davis Wood Jr., 1924–1978) was an American filmmaker, actor, writer, producer, and director.
